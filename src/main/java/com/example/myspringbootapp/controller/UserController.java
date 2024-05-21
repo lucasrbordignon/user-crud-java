@@ -1,6 +1,6 @@
 package com.example.myspringbootapp.controller;
 
-import com.example.myspringbootapp.model.User;
+import com.example.myspringbootapp.model.Users;
 import com.example.myspringbootapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +19,25 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public List<Users> getAllUsers() {
+        return userService.findAll();
+    }
+
     @GetMapping("/(id)")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<Users> getUserById(@PathVariable Long id) {
         return userService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public Users createUser(@RequestBody Users user) {
         return userService.save(user);
     }
 
     @PutMapping("/(id)")
-    public ResponseEntity<User> updateUser(@PathVariable Long id,  @RequestBody User user) {
+    public ResponseEntity<Users> updateUser(@PathVariable Long id,  @RequestBody Users user) {
         return userService.findById(id)
                 .map(existingUser -> {
                     user.setId(existingUser.getId());

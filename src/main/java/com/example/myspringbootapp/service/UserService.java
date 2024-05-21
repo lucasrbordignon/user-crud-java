@@ -1,6 +1,6 @@
 package com.example.myspringbootapp.service;
 
-import com.example.myspringbootapp.model.User;
+import com.example.myspringbootapp.model.Users;
 import com.example.myspringbootapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +18,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
+    public List<Users> findAll() {
         return userRepository.findAll();
     }
 
-    public Optional<User> findById(Long id) {
+    public Optional<Users> findById(Long id) {
         return userRepository.findById(id);
     }
 
-    public User save(User user) {
+    public Users save(Users user) {
         return userRepository.save(user);
     }
 
